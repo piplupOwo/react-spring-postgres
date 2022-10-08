@@ -1,4 +1,4 @@
-# react-spring-postgres
+# CRUD application with React frontend and Spring Boot with Postgresql backend
 https://piplupowo.github.io/react
 
 Web application with React client app frontend, Springboot (Java) backend with Postgresql as database
