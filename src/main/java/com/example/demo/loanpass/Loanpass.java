@@ -1,5 +1,8 @@
 package com.example.demo.loanpass;
+import com.example.demo.bookingdate.Bookingdate;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -20,6 +23,7 @@ public class Loanpass {
     private Integer passNumber;
     private Integer previousLoanBy;
     private String description;
+
 
     public Loanpass() {
     }
