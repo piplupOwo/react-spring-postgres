@@ -21,6 +21,10 @@ public class LoanpassService {
         return loanPassRepository.findAll();
     }
 
+    public List<Loanpass> getLoanPassByAttractionId(Integer attractionId){
+        return loanPassRepository.findLoanPassByAttractionId(attractionId);
+    }
+
     public void addNewLoanPass(Loanpass loanPass){
         Optional<Loanpass> loanPassOptional = loanPassRepository.findLoanPassBypassId(loanPass.getPassId());
         if(loanPassOptional.isPresent()){

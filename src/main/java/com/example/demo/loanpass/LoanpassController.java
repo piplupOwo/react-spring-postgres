@@ -21,6 +21,11 @@ public class LoanpassController {
         return loanPassService.getLoanPass();
     }
 
+    @GetMapping(path = "/getbyattraction/{attractionID}")
+    public List<Loanpass> getLoanPassByAttractionID(@PathVariable("attractionID") Integer attractionID) {
+        return loanPassService.getLoanPassByAttractionId(attractionID);
+    }
+
     @PostMapping
     public void registerNewLoanPass(@RequestBody Loanpass loanPass) {
         loanPassService.addNewLoanPass(loanPass);
