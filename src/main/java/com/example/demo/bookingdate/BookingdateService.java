@@ -48,6 +48,11 @@ public class BookingdateService {
     }
 
 
-
-
+    public void deleteBookingDate(Bookingdate bookingdate) {
+        boolean exists = bookingdateRepository.findBookingDate(bookingdate.getDate()).isPresent();
+        if(!exists){
+            throw new IllegalStateException("bookingdate with date " + bookingdate.getDate() + "does not exist");
+        }
+        bookingdateRepository.delete(bookingdate);
+    }
 }

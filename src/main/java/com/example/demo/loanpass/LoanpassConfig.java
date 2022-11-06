@@ -18,7 +18,7 @@ public class LoanpassConfig {
                     1,
                     1,
                     1,
-                    "description"
+                    "Uncollected,./Physical,./50.00,./email template here,./https://github.com/piplupOwo/piplupOwo.github.io/blob/main/resources/pip.gif?raw=true\n"
             );
 
             Loanpass loanpass2 = new Loanpass(
@@ -26,7 +26,7 @@ public class LoanpassConfig {
                     2,
                     2,
                     2,
-                    "description"
+                    "Uncollected,./Physical,./50.00,./email template here,./https://github.com/piplupOwo/piplupOwo.github.io/blob/main/resources/pip.gif?raw=true\n"
             );
 
             Loanpass loanpass3 = new Loanpass(
@@ -34,7 +34,7 @@ public class LoanpassConfig {
                     3,
                     3,
                     3,
-                    "description"
+                    "Uncollected,./Physical,./50.00,./email template here,./https://github.com/piplupOwo/piplupOwo.github.io/blob/main/resources/pip.gif?raw=true\n"
             );
 
             repository.saveAll(

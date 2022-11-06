@@ -29,7 +29,7 @@ public class BookingdateController {
         return bookingdateService.getSpecificBookingDate(date);
     }
 
-    @PostMapping
+    @PostMapping(path ="/save")
     public void registerNewBookingdate(@RequestBody Bookingdate bookingdate) {
         bookingdateService.addNewBookingDate(bookingdate);
     }
@@ -42,6 +42,11 @@ public class BookingdateController {
             @RequestParam(required = false) String waitingList) {
         bookingdateService.updateBookingDate(date, waitingList);
 
+    }
+
+    @DeleteMapping(path = "{date}")
+    public void deleteBookingdate(@PathVariable("date") String date) {
+        bookingdateService.deleteBookingDate(bookingdateService.getSpecificBookingDate(date).get());
     }
 
 

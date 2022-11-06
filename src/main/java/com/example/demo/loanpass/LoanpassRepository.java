@@ -16,4 +16,8 @@ public interface LoanpassRepository extends JpaRepository<Loanpass, Integer> {
 
     @Query("SELECT s FROM Loanpass s WHERE s.attractionId = ?1")
     List<Loanpass> findLoanPassByAttractionId(Integer attractionId);
+
+    // select all from loanpass order by pass id
+    @Query("SELECT s FROM Loanpass s ORDER BY s.passId")
+    List<Loanpass> findAllLoanPassOrdered();
 }

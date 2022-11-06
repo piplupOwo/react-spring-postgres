@@ -5,14 +5,11 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -46,7 +43,6 @@ public class EmailSenderService {
             mimeMessageHelper.setText(body);
             mimeMessageHelper.setSubject(subject);
 
-
             UrlResource file = new UrlResource(pathToAttachment);
             mimeMessageHelper.addAttachment(file.getFilename(), file);
 //            ATTACHMENT FILE NAME IS LIKE A RENAME OF THE FILE
@@ -54,8 +50,12 @@ public class EmailSenderService {
             mailSender.send(mimeMessage);
             System.out.println("MAIL SENT");
             return 1;
-        } catch (MessagingException | MalformedURLException e){
-            throw new IllegalStateException("Failed to send email");
+        } catch (MessagingException e){
+            System.out.println("ERROR");
+            return 0;
+        } catch (MalformedURLException e) {
+            System.out.println("Error");
+            return 0;
         }
 
 

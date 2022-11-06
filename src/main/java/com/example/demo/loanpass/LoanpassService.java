@@ -18,7 +18,7 @@ public class LoanpassService {
     }
 
     public List<Loanpass> getLoanPass(){
-        return loanPassRepository.findAll();
+        return loanPassRepository.findAllLoanPassOrdered();
     }
 
     public List<Loanpass> getLoanPassByAttractionId(Integer attractionId){
