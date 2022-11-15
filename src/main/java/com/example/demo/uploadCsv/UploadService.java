@@ -15,6 +15,7 @@ public class UploadService {
     public Boolean addUser(AppUser user){
         try{
             userService.saveUser(user);
+            userService.addRoleToUser(user.getUsername(),"ROLE_USER");
         }catch(IllegalStateException msg){
             return false;
         }

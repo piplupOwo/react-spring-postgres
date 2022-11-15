@@ -1,6 +1,8 @@
 package com.example.demo.uploadCsv;
 
 import com.example.demo.users.AppUser;
+import com.example.demo.users.UserRole;
+import com.example.demo.users.UserService;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 import com.univocity.parsers.common.record.Record;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -18,9 +21,9 @@ import java.util.List;
 public class UploadController {
 
     private final UploadService service;
-
+    private final UserService userService;
     @Autowired
-    public UploadController(UploadService service){ this.service = service;}
+    public UploadController(UploadService service,UserService userService){ this.service = service;this.userService=userService;}
 
     @PostMapping
     public String uploadCSV(@RequestParam("file") MultipartFile file) throws Exception{
@@ -30,12 +33,20 @@ public class UploadController {
         settings.setHeaderExtractionEnabled(true);
         CsvParser parser = new CsvParser(settings);
         List<Record> parseAllRecords = parser.parseAllRecords(inputStream);
+
         parseAllRecords.forEach(record ->{
             AppUser user = new AppUser();
             user.setPassword("defaultPassword");
             user.setEmail(record.getString("Email"));
+            user.setUserRoles(new ArrayList<>());
             user.setUsername(record.getString("Name"));
+            try{
+                user.setUsername(record.getString("Phone"));
+            }catch(IllegalArgumentException e){
+                user.setPhoneNumber("");
+            };
             userList.add(user);
+
         });
         String addedUser = "";
         String skippedUser = "";
@@ -46,6 +57,7 @@ public class UploadController {
                 skippedUser += "Skipped User " + u.getUsername() + "\n";
             }
         }
-        return addedUser + skippedUser;
+        System.out.println(addedUser + skippedUser);
+        return addedUser+skippedUser;
     }
 }

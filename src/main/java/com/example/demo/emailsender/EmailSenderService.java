@@ -20,16 +20,23 @@ public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(String toEmail, String subject, String body){
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("oopproject712@gmail.com");
-        message.setTo(toEmail);
-        message.setText(body);
-        message.setSubject(subject);
+    public int sendEmail(String toEmail, String subject, String body){
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper;
+        try{
 
-        mailSender.send(message);
-
-        System.out.println("MAIL SENT");
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage,"utf-8");
+            mimeMessageHelper.setFrom("oopproject712@gmail.com");
+            mimeMessageHelper.setTo(toEmail);
+            // html = true to support html
+            mimeMessageHelper.setText(body,true);
+            mimeMessageHelper.setSubject(subject);
+            mailSender.send(mimeMessage);
+            return 1;
+        } catch (Exception e){
+            System.out.println("ERROR");
+            return 0;
+        }
     }
 
 

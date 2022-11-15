@@ -41,6 +41,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 || request.getServletPath().equals("/api/v1/emailtemplates")
                 || request.getServletPath().equals("/api/v1/bookingdate/**")
                 || request.getServletPath().equals("/api/v1/bookingdate")
+                || request.getServletPath().equals("/api/v1/usersById/**")
+
 //                || request.getServletPath().equals("/api/v1/users/delete")
         )
 
