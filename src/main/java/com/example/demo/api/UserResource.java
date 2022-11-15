@@ -1,6 +1,5 @@
 package com.example.demo.api;
-import com.example.demo.emailtemplate.EmailTemplate;
-import com.example.demo.emailsender.EmailSenderService;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -40,21 +39,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class UserResource {
     private final UserService userService;
-    private final EmailSenderService emailSenderService;
 
     @GetMapping("/users")
     public ResponseEntity<List<AppUser>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
-    }
-
-    @GetMapping("/usersById/{id}")
-    public ResponseEntity<AppUser> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(userService.getReferenceById(id));
-    }
-
-    @GetMapping("/login/{username}")
-    public ResponseEntity<AppUser> getUser(@PathVariable("username") String username) {
-        return ResponseEntity.ok().body(userService.getUser(username));
     }
 
     @DeleteMapping(path = "/users/delete/{id}")
@@ -64,37 +52,8 @@ public class UserResource {
 
     @PostMapping("/user/save")
     public ResponseEntity<AppUser> saveUser(@RequestBody AppUser user) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/verify").query("token=" + user.getConfirmationToken()).toUriString());
-        ResponseEntity<AppUser> createdUser = ResponseEntity.created(uri).body(userService.saveUser(user));
-        // send email
-        EmailTemplate defaultTemplate = new EmailTemplate();
-        defaultTemplate.setEmailTemplateName("Registration Confirmation");
-        //<a href=\"" + "#regLink#" + "\">here</a>
-        defaultTemplate.setEmailTemplateBody("<p>Dear #newUserName#,</p><p>Please click <a href=\"" + "#regLink#" + "\">here</a>  to verify your account.</p><p><br></p><p>Regards,</p><p>HR Department</p>");
-
-        // formatting
-        String templateTitle = defaultTemplate.getEmailTemplateName();
-        String templateBody = defaultTemplate.getEmailTemplateBody();
-
-        String recipient = user.getUsername();
-        String recipientEmail = user.getEmail();
-        // regex patterns
-        templateBody = templateBody.replace("#newUserName#",recipient);
-        templateBody = templateBody.replace("#regLink#",uri.toString());
-        emailSenderService.sendEmail(recipientEmail,templateTitle,templateBody);
-        return createdUser;
-    }
-
-    @RequestMapping(value="/verify", method= {RequestMethod.GET, RequestMethod.POST}, produces= MediaType.TEXT_HTML_VALUE)
-    public String authUsers(@RequestParam("token")String confirmationToken){
-        if(userService.verify(confirmationToken)){
-            return "<html>\n" +
-                    "<body>\n" + "Congratulations!\n" + "Your account has been activated and email is verified\n" +
-                    "You may process to login now\n" + "</body>\n" + "</html>";
-        }else{
-            return "verify_fail";
-        }
-
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
     @PostMapping("/role/save")

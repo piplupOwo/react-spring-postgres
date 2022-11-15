@@ -22,7 +22,7 @@ public class EmailTemplateService {
     }
 
     public Optional<EmailTemplate> getEmailTemplateById(Integer emailTemplateId){
-        return emailTemplateRepository.getEmailTemplateById(emailTemplateId);
+        return emailTemplateRepository.getEmailTempalteById(emailTemplateId);
     }
 
     public void addNewEmailTemplate(EmailTemplate emailTemplate){
