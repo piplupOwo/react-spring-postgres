@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface EmailTemplateRepository extends JpaRepository<EmailTemplate,Integer>{
     @Query("SELECT s FROM EmailTemplate s WHERE s.emailTemplateId = ?1")
-    Optional<EmailTemplate> getEmailTempalteById(Integer passId);
+    Optional<EmailTemplate> getEmailTemplateById(Integer passId);
 
 }

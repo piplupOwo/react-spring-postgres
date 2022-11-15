@@ -17,12 +17,12 @@ public class Attractions {
             strategy = GenerationType.SEQUENCE,
             generator = "attractions_sequence"
     )
-    private Long attractionID;
+    private Integer attractionID;
     private String name;
     private String description;
     private String passType;
     private Integer replacementFee;
-    private String emailTemplate;
+    private Integer emailTemplateID;
     private Integer totalPasses;
     private String status;
 
@@ -30,22 +30,22 @@ public class Attractions {
 
     }
 
-    public Attractions(Long attractionID, String name, String description, String passType, Integer replacementFee, String emailTemplate, Integer totalPasses, String status) {
+    public Attractions(Integer attractionID, String name, String description, String passType, Integer replacementFee, Integer emailTemplateID, Integer totalPasses, String status) {
         this.attractionID = attractionID;
         this.name = name;
         this.description = description;
         this.passType = passType;
         this.replacementFee = replacementFee;
-        this.emailTemplate = emailTemplate;
+        this.emailTemplateID = emailTemplateID;
         this.totalPasses = totalPasses;
         this.status = status;
     }
 
-    public Long getAttractionID() {
+    public Integer getAttractionID() {
         return attractionID;
     }
 
-    public void setAttractionID(Long attractionID) {
+    public void setAttractionID(Integer attractionID) {
         this.attractionID = attractionID;
     }
 
@@ -81,12 +81,12 @@ public class Attractions {
         this.replacementFee = replacementFee;
     }
 
-    public String getEmailTemplate() {
-        return emailTemplate;
+    public Integer getEmailTemplateID() {
+        return emailTemplateID;
     }
 
-    public void setEmailTemplate(String emailTemplate) {
-        this.emailTemplate = emailTemplate;
+    public void setEmailTemplateID(Integer emailTemplateID) {
+        this.emailTemplateID = emailTemplateID;
     }
 
     public Integer getTotalPasses() {
