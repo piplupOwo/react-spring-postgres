@@ -37,9 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/user/save", "/api/token/refresh/**",
-                "/api/v1/attractions/**", "/api/v1/registration", "/api/v1/loanpass/**", "/api/v1/emailtemplates/**", "/api/v1/bookingdate/**", "/api/v1/users/delete/**", "/api/v1/successloan/**", "/api/v1/successloan", "/api/v1/sendemail").permitAll();
+                "/api/v1/attractions/**", "/api/v1/upload","/api/v1/registration", "/api/v1/loanpass/**", "/api/v1/emailtemplates/**", "/api/v1/bookingdate/**", "/api/v1/users/delete/**", "/api/v1/successloan/**", "/api/v1/successloan", "/api/v1/sendemail").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/v1/bookingdate","/api/v1/settings","/api/v1/usersById/**", "/api/v1/verify").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/v1/upload").hasAnyAuthority("ROLE_ADMIN");
+//        http.authorizeRequests().antMatchers(POST, "/api/v1/upload").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PUT, "/api/v1/settings").permitAll();
         http.authorizeRequests().antMatchers(POST,  "/api/v1/bookingdate/**", "/api/v1/bookingdate")
                 .hasAnyAuthority("ROLE_USER");
